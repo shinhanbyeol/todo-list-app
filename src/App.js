@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import TodoList from './TodoList';
 
 function App() {
+
+  const [todoItem, setTodoItme] = useState('');
+  const [todoList, setTodoList] = useState([]);
+  
+  const createTodoItme = e =>{
+    const value = e.target.value;
+    setTodoItme(value);
+  }
+  
+  const addTodoList = () => {
+    let _todoList = [...todoList, todoItem];
+    setTodoList(_todoList);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>todo list</div>
+      <input type="text" onChange={(e)=>createTodoItme(e)}></input>
+      <button onClick={addTodoList}>할일 추가</button>
+      <br />
+      <ul>
+        <TodoList todoList={todoList} />
+      </ul>                        
+    </>
   );
 }
 
